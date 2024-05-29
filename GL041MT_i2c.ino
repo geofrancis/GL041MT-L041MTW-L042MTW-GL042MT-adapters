@@ -45,7 +45,7 @@ void loop() {
  
     Serial.write(COM);  
     delay(100);
-    digitalWrite(LED_BUILTIN, LOW); 
+    digitalWrite(LED_BUILTIN, HIGH); 
     if(Serial.available() > 0){
     delay(4);
     if(Serial.read() == 0xff){    
@@ -57,7 +57,7 @@ void loop() {
       if(buffer_RTT[3] == CS) {
         distance = (buffer_RTT[1] << 8) + buffer_RTT[2];
         distances = (distance/10);
-        digitalWrite(LED_BUILTIN, HIGH);
+        digitalWrite(LED_BUILTIN, LOW);
         delay(100);
 
       }
