@@ -58,6 +58,7 @@ void loop() {
         distance = (buffer_RTT[1] << 8) + buffer_RTT[2];
         distances = (distance/10);
         digitalWrite(LED_BUILTIN, HIGH);
+        delay(100);
 
       }
     }
