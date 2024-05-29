@@ -43,9 +43,9 @@ void setup() {
 void loop() {
 
  
-    Serial.write(COM);
-    digitalWrite(LED_BUILTIN, LOW); 
+    Serial.write(COM);  
     delay(100);
+    digitalWrite(LED_BUILTIN, LOW); 
     if(Serial.available() > 0){
     delay(4);
     if(Serial.read() == 0xff){    
