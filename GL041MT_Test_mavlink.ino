@@ -21,27 +21,26 @@ void loop() {
 void read_sonar() {
   mySerial.write(COM);
   delay(100);
-  if(mySerial.available() > 0){
+  if (mySerial.available() > 0) {
     delay(4);
-    if(mySerial.read() == 0xff){    
+    if (mySerial.read() == 0xff) {
       buffer_RTT[0] = 0xff;
-      for (int i=1; i<4; i++){
-        buffer_RTT[i] = mySerial.read();   
+      for (int i = 1; i < 4; i++) {
+        buffer_RTT[i] = mySerial.read();
       }
-      CS = buffer_RTT[0] + buffer_RTT[1]+ buffer_RTT[2];  
-      if(buffer_RTT[3] == CS) {
+      CS = buffer_RTT[0] + buffer_RTT[1] + buffer_RTT[2];
+      if (buffer_RTT[3] == CS) {
         Distance = (buffer_RTT[1] << 8) + buffer_RTT[2];
-       
       }
     }
   }
 }
 
 
-void printvalue(){
- Serial.print("Distance:");
- Serial.print(Distance);
- Serial.println("mm");
+void printvalue() {
+  Serial.print("Distance:");
+  Serial.print(Distance);
+  Serial.println("mm");
 }
 
 void send_mavlink() {
@@ -50,14 +49,14 @@ void send_mavlink() {
   int sysid = 1;
   //< The component sending the message.
   int compid = 196;
-  uint32_t time_boot_ms = 0;            /*< Time since system boot*/
-  uint16_t min_distance = 5;            /*< Minimum distance the sensor can measure in centimeters*/
-  uint16_t max_distance = 600;          /*< Maximum distance the sensor can measure in centimeters*/
-  uint16_t current_distance = (Distance/10) ; /*< Current distance reading*/
-  uint8_t type = 0;                     /*< Type from MAV_DISTANCE_SENSOR enum.*/
-  uint8_t id = 0;                       /*< Onboard ID of the sensor*/
-  uint8_t orientation = 25;             /*(0=forward, each increment is 45degrees more in clockwise direction), 24 (upwards) or 25 (downwards)*/
-  uint8_t covariance = 0; /*< Measurement covariance in centimeters, 0 for unknown / invalid readings*/
+  uint32_t time_boot_ms = 0;                   /*< Time since system boot*/
+  uint16_t min_distance = 5;                   /*< Minimum distance the sensor can measure in centimeters*/
+  uint16_t max_distance = 600;                 /*< Maximum distance the sensor can measure in centimeters*/
+  uint16_t current_distance = (Distance / 10); /*< Current distance reading*/
+  uint8_t type = 0;                            /*< Type from MAV_DISTANCE_SENSOR enum.*/
+  uint8_t id = 0;                              /*< Onboard ID of the sensor*/
+  uint8_t orientation = 25;                    /*(0=forward, each increment is 45degrees more in clockwise direction), 24 (upwards) or 25 (downwards)*/
+  uint8_t covariance = 0;                      /*< Measurement covariance in centimeters, 0 for unknown / invalid readings*/
   float horizontal_fov = 0;
   float vertical_fov = 0;
   uint8_t signal_quality = 0;
