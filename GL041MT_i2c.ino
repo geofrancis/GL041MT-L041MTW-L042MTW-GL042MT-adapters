@@ -13,17 +13,6 @@ uint8_t CS;
 int Distance = 0;
 
 
-//look for i2c read read request
-void receiveEvent(int howMany) {
-  while (Wire.available()) {  // loop through all but the last
-    {
-      received = Wire.read();
-      if (received == 0x51) {
-        
-        }
-      }
-    }
-  }
 
 //send results over i2c
 void requestEvent() {
@@ -35,7 +24,6 @@ void requestEvent() {
 void setup() {
   Serial.begin(115200);
   Wire.begin(I2C_SLAVE_ADDR);
-  Wire.onReceive(receiveEvent);  // register event
   Wire.onRequest(requestEvent);
   pinMode(LED_BUILTIN, OUTPUT);
 }
@@ -43,9 +31,9 @@ void setup() {
 void loop() {
 
  
-    Serial.write(COM);  
+    Serial.write(COM);
+    digitalWrite(LED_BUILTIN, HIGH); 
     delay(100);
-    digitalWrite(LED_BUILTIN, LOW); 
     if(Serial.available() > 0){
     delay(4);
     if(Serial.read() == 0xff){    
@@ -57,8 +45,7 @@ void loop() {
       if(buffer_RTT[3] == CS) {
         distance = (buffer_RTT[1] << 8) + buffer_RTT[2];
         distances = (distance/10);
-        digitalWrite(LED_BUILTIN, HIGH);
-        delay(100);
+        digitalWrite(LED_BUILTIN, LOW);
 
       }
     }
