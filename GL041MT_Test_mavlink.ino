@@ -7,21 +7,15 @@ uint8_t CS;
 int Distance = 0;
 SoftwareSerial mySerial(10, 11);
 
-
-
 void setup() {
   Serial.begin(115200);
   mySerial.begin(115200);
 }
 
-
-
-
 void loop() {
   read_sonar();
   send_mavlink();
 }
-
 
 void read_sonar() {
   mySerial.write(COM);
@@ -47,12 +41,10 @@ void read_sonar() {
 
 void send_mavlink() {
 
-
   //MAVLINK DISTANCE MESSAGE
   int sysid = 1;
   //< The component sending the message.
   int compid = 196;
-
   uint32_t time_boot_ms = 0;            /*< Time since system boot*/
   uint16_t min_distance = 5;            /*< Minimum distance the sensor can measure in centimeters*/
   uint16_t max_distance = 600;          /*< Maximum distance the sensor can measure in centimeters*/
@@ -60,9 +52,6 @@ void send_mavlink() {
   uint8_t type = 0;                     /*< Type from MAV_DISTANCE_SENSOR enum.*/
   uint8_t id = 0;                       /*< Onboard ID of the sensor*/
   uint8_t orientation = 25;             /*(0=forward, each increment is 45degrees more in clockwise direction), 24 (upwards) or 25 (downwards)*/
-                                        // Consumed within ArduPilot by the proximity class
-
-
   uint8_t covariance = 0; /*< Measurement covariance in centimeters, 0 for unknown / invalid readings*/
   float horizontal_fov = 0;
   float vertical_fov = 0;
