@@ -14,6 +14,7 @@ void setup() {
 
 void loop() {
   read_sonar();
+  printvalue();
   send_mavlink();
 }
 
@@ -30,14 +31,18 @@ void read_sonar() {
       CS = buffer_RTT[0] + buffer_RTT[1]+ buffer_RTT[2];  
       if(buffer_RTT[3] == CS) {
         Distance = (buffer_RTT[1] << 8) + buffer_RTT[2];
-        Serial.print("Distance:");
-        Serial.print(Distance);
-        Serial.println("mm");
+       
       }
     }
   }
 }
 
+
+void printvalue(){
+ Serial.print("Distance:");
+ Serial.print(Distance);
+ Serial.println("mm");
+}
 
 void send_mavlink() {
 
