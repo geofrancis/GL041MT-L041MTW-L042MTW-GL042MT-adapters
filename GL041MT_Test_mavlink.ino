@@ -54,7 +54,7 @@ void send_mavlink() {
   uint16_t max_distance = 600;                 /*< Maximum distance the sensor can measure in centimeters*/
   uint16_t current_distance = (Distance / 10); /*< Current distance reading*/
   uint8_t type = 0;                            /*< Type from MAV_DISTANCE_SENSOR enum.*/
-  uint8_t id = 0;                              /*< Onboard ID of the sensor*/
+  uint8_t id = 1;                              /*< Onboard ID of the sensor*/
   uint8_t orientation = 25;                    /*(0=forward, each increment is 45degrees more in clockwise direction), 24 (upwards) or 25 (downwards)*/
   uint8_t covariance = 0;                      /*< Measurement covariance in centimeters, 0 for unknown / invalid readings*/
   float horizontal_fov = 0;
