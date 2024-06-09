@@ -6,7 +6,7 @@
 // Define variables
 uint8_t buffer_RTT[4];
 uint8_t CS;
-int Distance = 0;W
+int Distance = 0;
 SoftwareSerial mySerial(10, 11);
 
 void setup() {
@@ -15,6 +15,13 @@ void setup() {
 }
 
 void loop() {
+  read_sonar();
+  send_NMEA();
+}
+
+
+
+void read_sonar() {
   mySerial.write(COM);
   delay(100);
   if (mySerial.available() > 0) {
@@ -28,10 +35,14 @@ void loop() {
       if (buffer_RTT[3] == CS) {
         Distance = (buffer_RTT[1] << 8) + buffer_RTT[2];
       }else{
-        Distance = -1;
+        Distance = 0;
       }
     }
   }
+}
+
+void send_NMEA() {
+
 
   char nmea_string[20];
   sprintf(nmea_string, "$DPT,%1d.%02d,M,*,*", Distance / 1000, Distance % 100);
