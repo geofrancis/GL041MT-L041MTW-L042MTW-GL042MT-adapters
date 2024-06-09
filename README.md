@@ -1,4 +1,4 @@
-the mavlink converter will convert the GL041MT and GL042MY UART sonar moudles to MAVLINK rangefinder protocal.     
+the mavlink converter will convert the GL041MT and GL042MY UART sonar modules to MAVLINK rangefinder protocal.     
      
 set the serial port to 115200, MAVLINK 2 protocol.     
     
