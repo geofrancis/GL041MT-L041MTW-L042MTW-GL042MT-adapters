@@ -6,7 +6,7 @@
 // Define variables
 uint8_t buffer_RTT[4];
 uint8_t CS;
-int Distance = 0;
+int Distance = 0;W
 SoftwareSerial mySerial(10, 11);
 
 void setup() {
@@ -27,12 +27,14 @@ void loop() {
       CS = buffer_RTT[0] + buffer_RTT[1] + buffer_RTT[2];
       if (buffer_RTT[3] == CS) {
         Distance = (buffer_RTT[1] << 8) + buffer_RTT[2];
+      }else{
+        Distance = -1;
       }
     }
   }
 
-  char nmea_string[15];
-  sprintf(nmea_string, "$DPT,%1d.%02d,M,*,*", Distance / 10, Distance % 100);
+  char nmea_string[20];
+  sprintf(nmea_string, "$DPT,%1d.%02d,M,*,*", Distance / 1000, Distance % 100);
 
   int checksum = 0;
   for (int i = 1; i < strlen(nmea_string); i++) {
@@ -40,7 +42,7 @@ void loop() {
   }
 
   char checksum_char = checksum;
-  char nmea_string_with_checksum[16];
+  char nmea_string_with_checksum[21];
   strcpy(nmea_string_with_checksum, nmea_string);
   sprintf(&nmea_string_with_checksum[strlen(nmea_string)], "*%02X", checksum_char);
 
