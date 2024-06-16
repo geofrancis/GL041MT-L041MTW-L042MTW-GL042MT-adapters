@@ -9,7 +9,6 @@ local SPEED_RATIO          =    1
 local INVALID_DEPTH        =   -1
 local MAV_SEVERITY_WARNING =    4
 local MAV_SEVERITY_INFO    =    6
-
 local port = serial:find_serial(SERIAL_PORT)
 
 port:begin(BAUD_RATE)
@@ -47,9 +46,11 @@ function update()
     end
 
     local depth_raw = h_data << 8 | l_data
-    --gcs:send_named_float('RAW', depth_raw)
-    gcs:send_named_float(MAV_DEPTH_LABEL, depth_raw * SPEED_RATIO * 0.001)
-
+    gcs:send_named_float('DEPTH', depth_raw)
+        if terrainSensor ~= nil then
+            terrainSensor:handle_script_msg(depth_raw / 100)
+            gcs:send_text(6,"rangefinder")
+        end
     return update, RUN_INTERVAL_MS
 end
 
