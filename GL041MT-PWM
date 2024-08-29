@@ -43,6 +43,6 @@ void SONAR() {
 void PWM_OUT() {
 
   digitalWrite(PWM_PIN, HIGH);
-  delayMicroseconds(Distance * 10);
+  delayMicroseconds(Distance);
   digitalWrite(PWM_PIN, LOW);
 }
