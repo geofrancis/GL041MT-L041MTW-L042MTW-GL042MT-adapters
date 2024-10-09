@@ -5,3 +5,5 @@ set the serial port to 115200, MAVLINK 2 protocol.
 rngfnd1_type: 10 (mavlink)     
 rngfnd1_orient : 25 (Down)     
 rngfnd1_addr: 1     
+
+![image](https://github.com/user-attachments/assets/dbe077e1-65ce-49dc-ae0b-1ec0634bb4e4)
